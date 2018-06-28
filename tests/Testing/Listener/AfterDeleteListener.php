@@ -5,6 +5,7 @@ namespace SwoftTest\Db\Testing\Listener;
 use Swoft\Bean\Annotation\Listener;
 use Swoft\Event\EventHandlerInterface;
 use Swoft\Event\EventInterface;
+use SwoftTest\Db\Testing\Entity\User;
 use Xin\Swoft\Db\Event\ModelEvent;
 
 /**
@@ -19,11 +20,10 @@ class AfterDeleteListener implements EventHandlerInterface
      */
     public function handle(EventInterface $event)
     {
+        /** @var User $model */
         $model = $event->getModel();
-        if (method_exists($model, 'getDesc') && method_exists($model, 'setDesc')) {
-            if ('Set by beforeSaveListener' == $model->getDesc()) {
-                $model->setDesc('Delete by afterDeleteListener');
-            }
+        if (method_exists($model, 'setRoleId')) {
+            $model->setRoleId(0);
         }
     }
 }

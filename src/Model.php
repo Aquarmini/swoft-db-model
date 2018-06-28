@@ -6,6 +6,7 @@ use Swoft\App;
 use Swoft\Core\ResultInterface;
 use Swoft\Db\Model as SwoftModel;
 use Xin\Swoft\Db\Event\Events\ModelEventer;
+use Xin\Swoft\Db\Event\ModelEvent;
 
 class Model extends SwoftModel
 {

@@ -185,8 +185,8 @@ CREATE TABLE `user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '姓名',
   `role_id` int(11) NOT NULL COMMENT '角色ID',
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime,
+  `updated_at` datetime,
   PRIMARY KEY (`id`),
   UNIQUE KEY `NAME_UNIQUE` (`name`),
   KEY `ROLE_ID_INDEX` (`role_id`)

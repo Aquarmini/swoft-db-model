@@ -5,6 +5,7 @@ namespace SwoftTest\Db\Testing\Listener;
 use Swoft\Bean\Annotation\Listener;
 use Swoft\Event\EventHandlerInterface;
 use Swoft\Event\EventInterface;
+use SwoftTest\Db\Testing\Entity\User;
 use Xin\Swoft\Db\Event\ModelEvent;
 
 /**
@@ -19,9 +20,10 @@ class AfterSaveListener implements EventHandlerInterface
      */
     public function handle(EventInterface $event)
     {
+        /** @var User $model */
         $model = $event->getModel();
-        if (method_exists($model, 'setAge') && method_exists($model, 'getAge')) {
-            $model->setAge($model->getAge() + 1);
+        if (method_exists($model, 'setRoleId') && method_exists($model, 'getRoleId')) {
+            $model->setRoleId($model->getRoleId() + 1);
         }
     }
 }
