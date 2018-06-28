@@ -1,5 +1,5 @@
-# swoft-trait-instance
-基于Swoft的协程单例扩展
+# swoft-db-model
+基于Swoft的Model封装
 
 [![Build Status](https://travis-ci.org/limingxinleo/swoft-trait-instance.svg?branch=master)](https://travis-ci.org/limingxinleo/swoft-trait-instance)
 
