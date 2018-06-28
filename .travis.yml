@@ -30,7 +30,7 @@ install:
   - printf "\n" | pecl install --force swoole
   - phpenv config-rm xdebug.ini
   - bash tests/_ci/setup_dbs.sh
-  - cp -rf $TRAVIS_BUILD_DIR/tests/_ci/.env.example $TRAVIS_BUILD_DIR/tests/_ci/.env
+  - cp -rf $TRAVIS_BUILD_DIR/tests/.env.example $TRAVIS_BUILD_DIR/tests/.env
   # 安装项目
   - composer self-update
   - cd $TRAVIS_BUILD_DIR

@@ -40,4 +40,28 @@ class BeforeSaveListener implements EventHandlerInterface
 }
 ~~~
 
-将
+将事件类的位置放到 beanScan 中
+
+~~~php
+<?php
+// config/properties
+return [
+    'version' => '1.0',
+    'autoInitBean' => true,
+    'beanScan' => [
+        'SwoftTest\\Db\\Testing' => BASE_PATH . '/Testing',
+        'Xin\\Swoft\\Db' => BASE_PATH . '/../src',
+    ],
+    'I18n' => [
+        'sourceLanguage' => '@root/resources/messages/',
+    ],
+    'env' => 'Base',
+    'user.stelin.steln' => 'fafafa',
+    'Service' => [
+        'user' => [
+            'timeout' => 3000
+        ]
+    ],
+    'db' => require dirname(__FILE__) . DS . 'db.php',
+];
+~~~
