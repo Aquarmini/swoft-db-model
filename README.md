@@ -42,7 +42,49 @@ class AfterExecuteListener implements EventHandlerInterface
 }
 ~~~
 
-2. 配置DbPool到beanScan中
+2. 重写默认DB连接池
+
+主库
+
+~~~php
+<?php
+namespace App\Pool;
+
+use Swoft\Bean\Annotation\Pool;
+use Swoft\Db\Pool\DbPool as SwoftDbPool;
+use Xin\Swoft\Db\Pool\CreateConnectionTrait;
+
+/**
+ * OtherDbPool
+ *
+ * @Pool("default.master")
+ */
+class DbPool extends SwoftDbPool
+{
+    use CreateConnectionTrait;
+}
+~~~
+
+从库
+
+~~~php
+<?php
+namespace App\Pool;
+
+use Swoft\Bean\Annotation\Pool;
+use Swoft\Db\Pool\DbSlavePool as SwoftDbSlavePool;
+use Xin\Swoft\Db\Pool\CreateConnectionTrait;
+
+/**
+ * OtherDbSlavePool
+ *
+ * @Pool("default.slave")
+ */
+class DbSlavePool extends SwoftDbSlavePool
+{
+    use CreateConnectionTrait;
+}
+~~~
 
 3. 实体类增加DB连接池的Instance
 ~~~
