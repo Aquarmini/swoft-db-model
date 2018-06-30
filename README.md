@@ -3,6 +3,55 @@
 
 [![Build Status](https://travis-ci.org/limingxinleo/swoft-db-model.svg?branch=master)](https://travis-ci.org/limingxinleo/swoft-db-model)
 
+## Mysql Connection 事件的使用
+
+增加事件类
+
+~~~php
+<?php 
+namespace SwoftTest\Db\Testing\Listener;
+
+use Swoft\App;
+use Swoft\Bean\Annotation\Listener;
+use Swoft\Event\EventHandlerInterface;
+use Swoft\Event\EventInterface;
+use SwoftTest\Db\Testing\Entity\User;
+use Xin\Swoft\Db\Driver\Mysql\MysqlConnection;
+use Xin\Swoft\Db\Event\MysqlConnectionEvent;
+
+/**
+ * Model before save handler
+ *
+ * @Listener(MysqlConnectionEvent::AFTER_EXECUTE)
+ */
+class AfterExecuteListener implements EventHandlerInterface
+{
+    /**
+     * @param \Swoft\Event\EventInterface $event
+     */
+    public function handle(EventInterface $event)
+    {
+        /** @var MysqlConnection $model */
+        $model = $event->getConnection();
+
+        $runtime = App::getAlias('@runtime');
+        $file    = $runtime . '/sql.log';
+
+        file_put_contents($file, $model->getSql() . PHP_EOL, FILE_APPEND);
+    }
+}
+~~~
+
+## 实体类增加DB连接池的Instance
+~~~
+此实体重写了Mysql和同步Mysql链接，但是连接池配置与default一致，可以放心使用。
+注解如下
+
+@Entity(instance="dbModel")
+
+~~~
+
+
 ## 模型事件的使用
 
 增加事件类
