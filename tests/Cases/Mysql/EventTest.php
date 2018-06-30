@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 namespace SwoftTest\Db\Cases\Mysql;
 
+use Swoft\App;
 use SwoftTest\Db\Cases\AbstractMysqlCase;
 use SwoftTest\Db\Testing\Entity\User;
 
@@ -22,7 +23,7 @@ class EventTest extends AbstractMysqlCase
     {
         $user = new User();
         $user->fill([
-            'name' => 'test.' . rand(0, 999),
+            'name'   => 'test.' . rand(0, 999),
             'roleId' => 1
         ]);
 
@@ -34,7 +35,7 @@ class EventTest extends AbstractMysqlCase
     {
         $user = new User();
         $user->fill([
-            'name' => 'test.' . rand(0, 999),
+            'name'   => 'test.' . rand(0, 999),
             'roleId' => 1
         ]);
 
@@ -46,7 +47,7 @@ class EventTest extends AbstractMysqlCase
     {
         $user = new User();
         $user->fill([
-            'name' => 'test.' . rand(0, 999),
+            'name'   => 'test.' . rand(0, 999),
             'roleId' => 1
         ]);
 
@@ -62,7 +63,7 @@ class EventTest extends AbstractMysqlCase
     {
         $user = new User();
         $user->fill([
-            'name' => 'test.' . rand(0, 999),
+            'name'   => 'test.' . rand(0, 999),
             'roleId' => 1
         ]);
 
@@ -71,5 +72,25 @@ class EventTest extends AbstractMysqlCase
 
         $user->delete();
         $this->assertEquals(0, $user->getRoleId());
+    }
+
+    public function testSqlLog()
+    {
+        $runtime = App::getAlias('@runtime');
+        $file    = $runtime . '/sql.log';
+
+        $count = count(file($file));
+
+        $user = new User();
+        $user->fill([
+            'name'   => 'test.' . rand(0, 999),
+            'roleId' => 1
+        ]);
+
+        $user->save();
+
+        $count2 = count(file($file));
+
+        $this->assertEquals($count + 1, $count2);
     }
 }

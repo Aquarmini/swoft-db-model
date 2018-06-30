@@ -21,4 +21,3 @@ trait SaveEventTrait
         return $result;
     }
 }
-

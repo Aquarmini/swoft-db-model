@@ -24,7 +24,7 @@ class ModelEventer extends Event
     private $model;
 
     /**
-     * SaveModelEvent constructor.
+     * ModelEventer constructor.
      * @param null|string $name
      * @param Model       $model
      */
