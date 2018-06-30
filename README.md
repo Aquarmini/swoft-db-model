@@ -5,7 +5,7 @@
 
 ## Mysql Connection 事件的使用
 
-增加事件类
+1. 增加事件类
 
 ~~~php
 <?php 
@@ -42,7 +42,9 @@ class AfterExecuteListener implements EventHandlerInterface
 }
 ~~~
 
-## 实体类增加DB连接池的Instance
+2. 配置DbPool到beanScan中
+
+3. 实体类增加DB连接池的Instance
 ~~~
 此实体重写了Mysql和同步Mysql链接，但是连接池配置与default一致，可以放心使用。
 注解如下
